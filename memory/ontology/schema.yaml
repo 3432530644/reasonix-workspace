@@ -1,0 +1,28 @@
+types:
+  Person:
+    required:
+    - name
+  Project:
+    required:
+    - name
+    - status
+  Task:
+    required:
+    - title
+    - status
+relations:
+  has_member:
+    from_types:
+    - Project
+    to_types:
+    - Person
+  has_task:
+    from_types:
+    - Project
+    to_types:
+    - Task
+  assignee_of:
+    from_types:
+    - Task
+    to_types:
+    - Person

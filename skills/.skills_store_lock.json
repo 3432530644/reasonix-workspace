@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "skills": {
+    "weather": {
+      "name": "Weather",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=weather",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-11T14:39:49Z"
+    },
+    "valuation-analysis": {
+      "name": "股票价值投资分析系统",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=valuation-analysis",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-11T14:46:00Z"
+    },
+    "mx-finance-data": {
+      "name": "All-Market Financial Data Hub",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=mx-finance-data",
+      "source": "community",
+      "version": "1.0.12",
+      "installedAt": "2026-06-11T15:01:12Z"
+    },
+    "aihot": {
+      "name": "Aihot Skill Lite",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=aihot",
+      "source": "community",
+      "version": "0.1.1",
+      "installedAt": "2026-06-11T15:29:29Z"
+    },
+    "ima-skills": {
+      "name": "ima-skills",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=ima-skills",
+      "source": "community",
+      "version": "1.1.7",
+      "installedAt": "2026-06-12T14:13:41Z"
+    },
+    "ontology": {
+      "name": "ontology",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=ontology",
+      "source": "community",
+      "version": "1.0.4",
+      "installedAt": "2026-06-12T14:17:14Z"
+    },
+    "summarize-pro": {
+      "name": "Summarize Pro",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=summarize-pro",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-12T14:44:28Z"
+    }
+  }
+}
