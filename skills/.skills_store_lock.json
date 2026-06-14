@@ -49,6 +49,83 @@
       "source": "community",
       "version": "1.0.0",
       "installedAt": "2026-06-12T14:44:28Z"
+    },
+    "akshare-stock": {
+      "name": "A股量化 AkShare",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=akshare-stock",
+      "source": "community",
+      "version": "1.0.1",
+      "installedAt": "2026-06-14T13:54:48Z"
+    },
+    "stock-price-query": {
+      "name": "股票查询 / Stock Price Query",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=stock-price-query",
+      "source": "community",
+      "version": "1.2.1",
+      "installedAt": "2026-06-14T13:57:59Z"
+    },
+    "stock-market-pro": {
+      "name": "Stock Market Pro",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=stock-market-pro",
+      "source": "community",
+      "version": "1.2.12",
+      "installedAt": "2026-06-14T13:58:02Z"
+    },
+    "stock-watcher": {
+      "name": "Stock Watcher",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=stock-watcher",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-14T13:58:05Z"
+    },
+    "fund-query": {
+      "name": "场外基金查询",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=fund-query",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-14T13:58:10Z"
+    },
+    "fund-invest-advisor": {
+      "name": "Fund Invest Advisor",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=fund-invest-advisor",
+      "source": "community",
+      "version": "2.3.4",
+      "installedAt": "2026-06-14T13:58:13Z"
+    },
+    "fund-analyzer": {
+      "name": "fund-analyzer",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=fund-analyzer",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-14T13:58:16Z"
+    },
+    "fund-news-daily": {
+      "name": "基金新闻日报",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=fund-news-daily",
+      "source": "community",
+      "version": "1.2.1",
+      "installedAt": "2026-06-14T13:58:19Z"
+    },
+    "stock-monitor-pro": {
+      "name": "Stock Monitor Pro",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=stock-monitor-pro",
+      "source": "community",
+      "version": "2.1.0",
+      "installedAt": "2026-06-14T14:00:25Z"
+    },
+    "note-taker": {
+      "name": "Note Taker",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=note-taker",
+      "source": "community",
+      "version": "2.0.1",
+      "installedAt": "2026-06-14T14:23:53Z"
+    },
+    "organize-vault": {
+      "name": "Organize Vault",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=organize-vault",
+      "source": "community",
+      "version": "1.1.0",
+      "installedAt": "2026-06-14T14:24:03Z"
     }
   }
 }
