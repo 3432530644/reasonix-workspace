@@ -14,3 +14,9 @@ build/
 
 # Node
 node_modules/
+
+# 独立子项目（各有自己的 .git）
+my-project/
+
+# Personal notes
+notes/

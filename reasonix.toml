@@ -46,6 +46,7 @@ paths = ["./skills"]   # extra custom skill roots (ontology, mx-finance-data, su
 # max_depth = 3   # nested scan depth; set 1 for legacy root-only discovery
 # disabled_skills = ["review"]   # hide noisy or unwanted skills
 
+
 [permissions]
 # Per-call gating. mode = writer fallback when no rule matches: ask|allow|deny.
 # Readers always default to allow. Precedence: deny > ask > allow > fallback.
