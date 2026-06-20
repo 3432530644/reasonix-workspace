@@ -1,6 +1,6 @@
 ---
 name: teach
-description: Teach the user a new skill or concept, within this workspace.
+description: Teach the user a new skill or concept, within this workspace. Trigger when the user says "teach me", "learn about", "tutorial on", "guide me through", "explain this", "I want to learn", "give me a lesson", "show me how to", or asks for structured learning on any topic. Activates when the user wants to acquire knowledge or skills through lessons, reference documents, and interactive practice.
 disable-model-invocation: true
 argument-hint: "What would you like to learn about?"
 ---
@@ -138,3 +138,24 @@ Glossaries, in particular, are an essential reference. Once one is created, it s
 ## `NOTES.md`
 
 The user will sometimes express preferences of how they want to be taught, or things you should keep in mind. This is the place to record those preferences, so you can refer back to them when designing lessons or working with the user.
+
+## Error Handling
+
+| Situation | Handling |
+|-----------|----------|
+| `MISSION.md` not found | Ask the user why they want to learn this topic before proceeding |
+| `RESOURCES.md` not populated | Research high-quality, high-trust resources first; never rely on parametric knowledge alone |
+| Lesson file write fails | Check directory permissions; retry with a simplified filename |
+| Reference material URL is dead | Inform the user and suggest an alternative; skip that resource |
+| User asks for something out of scope (requires real-world wisdom) | Attempt to answer, then delegate to a community (forum, subreddit, local group) |
+| Component in `./assets/` missing but referenced | Create a minimal placeholder and log a note for the user |
+
+## NEVER
+
+- NEVER rely solely on parametric (training) knowledge — always research from trusted resources and populate `RESOURCES.md`
+- NEVER produce a lesson without tying it to the mission in `MISSION.md`
+- NEVER skip the zone of proximal development check — read `learning-records` first to gauge the user's level
+- NEVER inline code that could be a reusable component in `./assets/` — reuse is the default
+- NEVER ask the user to configure or install anything outside the teaching workspace
+- NEVER skip creating reference documents (glossaries, cheat sheets) when the topic has its own nomenclature
+- NEVER override user preferences recorded in `NOTES.md` without confirmation

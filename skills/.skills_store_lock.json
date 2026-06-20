@@ -126,6 +126,27 @@
       "source": "community",
       "version": "1.1.0",
       "installedAt": "2026-06-14T14:24:03Z"
+    },
+    "skill-assistant-pro": {
+      "name": "skill-assistant",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=skill-assistant-pro",
+      "source": "community",
+      "version": "2.1.0",
+      "installedAt": "2026-06-20T02:10:52Z"
+    },
+    "dailyhot-skill": {
+      "name": "全网热搜-聚合56+热榜数据",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=dailyhot-skill",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-20T02:28:45Z"
+    },
+    "baidu-netdisk-skills": {
+      "name": "百度网盘",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=baidu-netdisk-skills",
+      "source": "community",
+      "version": "1.1.5",
+      "installedAt": "2026-06-20T02:32:00Z"
     }
   }
 }

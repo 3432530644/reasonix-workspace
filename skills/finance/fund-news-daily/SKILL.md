@@ -90,4 +90,12 @@ fund-news-daily/
     ├── query_rules.md          # 时间查询规则
     ├── technical_specs.md      # 技术实现细节
     └── word_format.md          # Word格式规范参考
+
+## NEVER
+
+- NEVER include individual stock recommendations
+- NEVER fabricate news that wasn't in the source
+- NEVER alter the original meaning of quoted news content
+- NEVER provide investment advice based on news summaries
+- NEVER omit source attribution for any news item
 ```

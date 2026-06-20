@@ -128,3 +128,15 @@ Take a second pass. Go back to the code and refine/polish further to make this a
 ## MULTI-PAGE OPTION
 
 To create additional pages when requested, create more creative pages along the same lines as the design philosophy but distinctly different as well. Bundle those pages in the same .pdf or many .pngs. Treat the first page as just a single page in a whole coffee table book waiting to be filled. Make the next pages unique twists and memories of the original. Have them almost tell a story in a very tasteful way. Exercise full creative freedom.
+
+---
+
+## NEVER Rules
+
+1. **NEVER copy or replicate existing artists' copyrighted work** — create original designs inspired by aesthetic philosophy, not direct reproductions. Avoid mimicking distinctive visual elements (logos, character designs, trademarked imagery) from known IP.
+
+2. **NEVER let text overlap with other elements or fall outside canvas boundaries** — every element must have proper margins and breathing room. After layout, verify that no text, shapes, or graphics are clipped, overlapping, or positioned beyond the canvas edge.
+
+3. **NEVER output low-resolution or pixelated images** — all `.png` deliveries must be at least 300 DPI (or appropriate print resolution). `.pdf` outputs should use vector graphics where possible to ensure crisp rendering at any scale.
+
+4. **NEVER skip the refinement pass** — the first output is never the final product. Always re-read the code, re-evaluate the composition, and make at least one polishing pass to improve cohesion, spacing, and craftsmanship before delivery.

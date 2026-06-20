@@ -132,3 +132,11 @@ python3 scripts/yf.py --help
 - KR: `005930.KS`, `000660.KS`
 - Crypto: `BTC-USD`, `ETH-KRW`
 - FX: `USDKRW=X`
+
+## NEVER
+
+- NEVER provide investment advice
+- NEVER guarantee price targets
+- NEVER suggest buying or selling a specific stock
+- NEVER present technical indicators as definitive predictions
+- NEVER recommend leveraged or derivative products without explicit warning

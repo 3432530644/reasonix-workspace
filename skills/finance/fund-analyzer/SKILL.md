@@ -152,3 +152,13 @@ python3 scripts/query_fund_holding.py <基金代码>
 - 定期更新数据源URL
 - 注意网页结构变化可能影响爬取逻辑
 - 添加缓存机制减少重复请求
+
+## NEVER 规则
+
+以下为基金分析中**绝对禁止**的行为规则，必须严格遵守：
+
+1. **NEVER recommend specific funds without disclaimer** — 推荐具体基金时必须附带风险提示声明，说明"基金投资有风险，投资需谨慎，本推荐不构成投资建议"。
+2. **NEVER guarantee fund performance** — 严禁承诺或保证基金未来收益，历史业绩不代表未来表现。
+3. **NEVER fabricate fund data** — 禁止伪造、篡改或凭空编造基金净值、收益率、持仓等数据，所有数据须来源于指定数据源。
+4. **NEVER misinterpret fund ratings** — 不得曲解或过度解读基金评级（如晨星评级、银河评级等），评级仅作为参考指标之一。
+5. **NEVER ignore fund fees/costs when evaluating** — 评估基金时必须考虑申购费、赎回费、管理费、托管费等各项费用对实际收益的影响。

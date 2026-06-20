@@ -1,6 +1,6 @@
 ---
 name: webapp-testing
-description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.
+description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, viewing browser logs, and automating end-to-end workflows. Trigger keywords: test, testing, playwright, e2e, end-to-end, browser test, UI test, automation, integration test, headless, selenium, webdriver, screenshot, local webapp.
 license: Complete terms in LICENSE.txt
 ---
 
@@ -94,3 +94,21 @@ with sync_playwright() as p:
   - `element_discovery.py` - Discovering buttons, links, and inputs on a page
   - `static_html_automation.py` - Using file:// URLs for local HTML
   - `console_logging.py` - Capturing console logs during automation
+
+## Error Handling
+
+- **Server startup failure**: If `with_server.py` exits non-zero or the port is occupied, report the error output to the user and suggest checking port conflicts, missing dependencies (e.g., Node.js, Python), or malformed startup commands. Do not proceed with testing until the server is confirmed healthy.
+- **Timeout / hang**: If `page.wait_for_load_state('networkidle')` or `page.wait_for_selector()` times out, capture a screenshot (`page.screenshot()`) and inspect `page.content()` to understand the actual page state. The app may have client-side errors that prevent rendering.
+- **Selector not found**: When a locator fails to match, inspect the DOM with `page.content()` and use broader or role-based selectors (`role=button`, `text=Submit`). Avoid brittle selectors tied to dynamic class names.
+- **Browser launch failure**: Ensure Chromium is installed (`playwright install chromium`). Fall back to `channel="chrome"` or `channel="msedge"` if system browsers are available.
+- **Static HTML loading issues**: Use `file://` absolute paths for local HTML files. Verify the file exists at the path before writing the script.
+
+## NEVER
+
+- NEVER skip writing tests for critical user flows (login, checkout, data submission, error states) — these are the highest-value tests and must be covered.
+- NEVER write tests that depend on other tests — each test must be independently runnable and must not share mutable state with other tests.
+- NEVER hardcode dynamic values (session tokens, timestamps, auto-generated IDs) into assertions. Use stable attributes (`data-testid`, `role`, `text`) or capture them at runtime.
+- NEVER read the source code of helper scripts (`scripts/with_server.py` etc.) before running them with `--help` first — they are large and pollute the context window.
+- NEVER inspect the DOM or take screenshots before waiting for `networkidle` on dynamic applications — the page may not be fully rendered.
+- NEVER leave the browser open after the test completes — always call `browser.close()` in a `finally` block or use context managers.
+- NEVER use `sleep()` for synchronization — always use explicit waits (`wait_for_selector`, `wait_for_load_state`, `wait_for_timeout`) that react to actual page state.

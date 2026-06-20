@@ -312,3 +312,21 @@ with open("encrypted.pdf", "wb") as output:
 - For JavaScript libraries (pdf-lib), see REFERENCE.md
 - If you need to fill out a PDF form, follow the instructions in FORMS.md
 - For troubleshooting guides, see REFERENCE.md
+
+---
+
+## NEVER Rules
+
+1. **NEVER use scanned PDF OCR as a substitute for native text extraction** — always prefer `pdfplumber.extract_text()` / `.extract_tables()` before falling back to OCR (pytesseract). OCR is only for genuinely scanned (image-based) PDFs, not for text-layer PDFs.
+
+2. **NEVER modify or destroy the original PDF's layout/formatting** — when merging, splitting, or editing, preserve the original page dimensions, fonts, margins, and content order unless the user explicitly requests reformatting.
+
+3. **NEVER hardcode file paths or passwords** — read input paths from user arguments; prompt for passwords interactively rather than embedding them in code.
+
+4. **NEVER lose track of the working directory** — always write output files to the user's current working directory or a clearly indicated output folder; do not silently scatter files across the filesystem.
+
+5. **NEVER use Unicode subscript/superscript characters (₀₁₂₃₄₅₆₇₈₉, ⁰¹²³⁴⁵⁶⁷⁸⁹) in ReportLab PDFs** — built-in fonts will render them as black boxes; use XML markup (`<sub>` / `<super>`) or manual font-size/position adjustments instead.
+
+6. **NEVER silently overwrite existing files** — check for file existence before writing and confirm with the user, or generate unique output filenames.
+
+7. **NEVER extract password-protected PDFs without permission** — if a PDF is encrypted, ask the user for the password rather than attempting brute-force or bypass methods.

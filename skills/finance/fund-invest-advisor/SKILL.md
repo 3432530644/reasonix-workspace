@@ -69,3 +69,11 @@ Powered by BytesAgain | bytesagain.com
 ## Requirements
 - bash 4+
 - python3 (standard library only)
+
+## NEVER
+
+- NEVER recommend individual stocks without risk assessment
+- NEVER guarantee specific returns
+- NEVER suggest timing the market
+- NEVER advise leveraged trading or borrowing to invest
+- NEVER ignore the investor's risk tolerance level

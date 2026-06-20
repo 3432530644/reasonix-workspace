@@ -230,3 +230,25 @@ python3 scripts/ontology.py list --type Person
 ## Instruction Scope
 
 Runtime instructions operate on local files (`memory/ontology/graph.jsonl` and `memory/ontology/schema.yaml`) and provide CLI usage for create/query/relate/validate; this is within scope. The skill reads/writes workspace files and will create the `memory/ontology` directory when used. Validation includes property/enum/forbidden checks, relation type/cardinality validation, acyclicity for relations marked `acyclic: true`, and Event `end >= start` checks; other higher-level constraints may still be documentation-only unless implemented in code.
+
+## Error Handling
+
+| Situation | Handling |
+|-----------|----------|
+| `scripts/ontology.py` not found | Inform user the skill environment is not initialized; run Quick Start steps |
+| `graph.jsonl` does not exist | Create empty file with `touch` (the scripts handle missing file gracefully) |
+| `schema.yaml` missing | Operations still work — only constraint validation is skipped |
+| Entity `id` already exists on create | Return conflict error; inform user and suggest querying the existing entity |
+| Relation violates `acyclic: true` | Reject the mutation and report the offending cycle path |
+| Relation type not in schema | Warn but allow (schema is optional); recommend adding to `schema.yaml` |
+| File lock contention | Retry once after 500ms; if still locked, abort and report |
+
+## NEVER
+
+- NEVER store secrets (passwords, tokens, API keys) directly in entity properties — always use indirect `Credential` refs with `secret_ref`
+- NEVER overwrite `graph.jsonl` or `schema.yaml` — append/merge only (append-only rule preserves history)
+- NEVER rely on in-memory state without persisting to the JSONL store
+- NEVER assume an entity exists without querying the graph first
+- NEVER perform circular relation chains on relations marked `acyclic: true`
+- NEVER ignore constraint violations — stop and report before committing a mutation
+- NEVER hardcode entity IDs — let the CLI/script generate them or verify uniqueness

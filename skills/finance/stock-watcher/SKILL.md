@@ -86,3 +86,11 @@ This skill provides comprehensive stock watchlist management capabilities, allow
 - `list_stocks.py` - 列出所有自选股
 - `clear_watchlist.py` - 清空自选股列表
 - `summarize_performance.py` - 获取股票行情摘要
+
+## NEVER
+
+- NEVER provide buy/sell recommendations based on watchlist data
+- NEVER guarantee the accuracy of real-time data
+- NEVER suggest portfolio allocation without user's full holdings context
+- NEVER fabricate stock data or price predictions
+- NEVER use watchlist data to make unsolicited trading suggestions

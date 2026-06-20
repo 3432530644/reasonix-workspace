@@ -290,3 +290,15 @@ The script returns JSON with error details:
 - Add comments to cells with complex formulas or important assumptions
 - Document data sources for hardcoded values
 - Include notes for key calculations and model sections
+
+## NEVER Rules
+
+1. **NEVER hardcode calculated values as plain numbers** — always use Excel formulas (`=SUM(...)`, `=AVERAGE(...)`, cell references, etc.) instead of computing in Python and writing the result as a static value. Spreadsheets must remain dynamic and recalculable.
+
+2. **NEVER use `WidthType.PERCENTAGE` for table widths** — percentage-based widths break in Google Docs and other renderers; always use `WidthType.DXA` (twips) with exact pixel calculations.
+
+3. **NEVER save a file opened with `data_only=True`** — doing so permanently replaces formulas with their cached values, destroying the spreadsheet's calculation logic. Always reload the original file if you need to modify formulas.
+
+4. **NEVER leave formula errors (`#REF!`, `#DIV/0!`, `#VALUE!`, `#N/A`, `#NAME?`) unresolved** — every deliverable must pass `scripts/recalc.py` with zero errors. Test edge cases (zeros, negatives, empty cells) before delivery.
+
+5. **NEVER skip the recalculation step** — after any formula modification, always run `python scripts/recalc.py output.xlsx` to ensure all formulas are evaluated and error-free.

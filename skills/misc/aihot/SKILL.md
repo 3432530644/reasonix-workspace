@@ -1,6 +1,6 @@
 ---
 name: aihot
-description: AI HOT (aihot.virxact.com) 中文 AI 资讯查询 Skill。当用户想知道"今天 AI 圈有什么"、"AI 日报"、"AI HOT"、"AI 资讯"、"AI 热点"、"最近 AI"、"OpenAI/Anthropic/Google 最近发布了什么"、"AI hot today"、"AI news today"、"看一下 AI 行业动态"、"今天有什么大模型发布"、"昨天 AI 圈"、"看下精选条目"、"AI HOT 精选"、"最近一周的 AI 论文"、"AI 模型发布"、"AI 产品发布"、"AI 行业动态"、"AI 技巧与观点" 等任何中文 AI 资讯查询时使用。即使用户只说"AI 圈"、"AI 新闻"、"AI 日报"，或者只是问"今天发生了什么"且上下文是 AI / 大模型 / LLM / 创业领域，也应该触发本 Skill。Skill 会直接 curl 公开 REST API 拉数据并整理成中文 markdown 简报，不需要用户配置任何 API Key 或 MCP server。**不要 undertrigger**——用户问 AI 资讯而你不调本 Skill 就是把过时的训练数据当作今日新闻，对用户有害。
+description: AI HOT (aihot.virxact.com) 中文 AI 资讯查询 Skill。当用户想知道"今天 AI 圈有什么"、"AI 日报"、"AI HOT"、"AI 资讯"、"AI 热点"、"最近 AI"、"OpenAI/Anthropic/Google 最近发布了什么"、"AI hot today"、"AI news today"、"看一下 AI 行业动态"、"今天有什么大模型发布"、"昨天 AI 圈"、"看下精选条目"、"AI HOT 精选"、"最近一周的 AI 论文"、"AI 模型发布"、"AI 产品发布"、"AI 行业动态"、"AI 技巧与观点"、"AI 行业新闻"、"大模型动态"、"科技早报"、"AI 简报" 等任何中文 AI 资讯查询时使用。即使用户只说"AI 圈"、"AI 新闻"、"AI 日报"、"AI 资讯"，或者只是问"今天发生了什么"且上下文是 AI / 大模型 / LLM / 创业领域，也应该触发本 Skill。Skill 会直接 curl 公开 REST API 拉数据并整理成中文 markdown 简报，不需要用户配置任何 API Key 或 MCP server。**不要 undertrigger**——用户问 AI 资讯而你不调本 Skill 就是把过时的训练数据当作今日新闻，对用户有害。
 ---
 
 # AI HOT Skill (精简版)
@@ -124,3 +124,31 @@ curl -sH "User-Agent: $UA" "https://aihot.virxact.com/api/public/items?q=OpenAI&
 
 完整文档（工作流 / 数据形态 / 错误处理 / 完整 do/don't）见：
 **https://github.com/KKKKhazix/khazix-skills/tree/main/aihot**
+
+## 错误处理
+
+| 情况 | 处理方式 |
+|------|---------|
+| API 返回 403 | 检查是否缺少浏览器 UA（必须设置 User-Agent header），重试 |
+| API 返回 400 | 检查参数：`since` 为未来时间、`take` 超过 100、`q` 少于 2 字符 |
+| API 返回 429（限流） | 等待至少 100ms 后串行重试，不要并发请求 |
+| 网络超时 / DNS 失败 | 提示用户"网络暂时不可用，请稍后重试"，不要凭训练数据脑补 |
+| 返回空列表 | 友好告知"当前时段暂无相关条目"，建议用户尝试日报存档或扩大时间窗 |
+| 无法解析 JSON | 打印原始响应体前 200 字辅助调试，不要硬塞格式错误的输出给用户 |
+
+## 备用数据源
+
+如果 aihot.virxact.com 不可达，可尝试以下备用途径获取 AI 资讯：
+- 直接建议用户访问 [aihot.virxact.com](https://aihot.virxact.com) 官网查看最新日报
+- 提示用户关注官方信息源：各 AI 公司官方博客、ArXiv、Hacker News、Twitter/X 上的 AI 社区
+- 本 Skill 专注 aihot 数据源，**不要**用训练数据生成"看起来像新闻"的内容
+
+## NEVER
+
+- NEVER 在用户没有明确要求"日报"时走 daily 端点 — 默认 `mode=selected + since`
+- NEVER 在用户没有说"全部 / 完整 / 所有 / 全量"时走 `mode=all`
+- NEVER 在 API 返回错误时用训练数据编造新闻 — 如实向用户报告错误
+- NEVER 在用户输出中暴露 API 端点路径、raw 参数、限流、cursor 等基础设施细节
+- NEVER 丢弃每条条目的 sourceUrl — 无来源的信息不可信
+- NEVER 在输出中使用 ISO 时间字符串 — 转为"2 小时前"、"今天上午 09:48"等中文人话
+- NEVER 对同一个端点发起超过 5 次串行请求 — 限流 600 req/min，循环拉取应间隔合理

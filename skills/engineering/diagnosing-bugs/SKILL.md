@@ -1,6 +1,6 @@
 ---
 name: diagnosing-bugs
-description: Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow.
+description: Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow, or asks about root cause analysis, error investigation, crash analysis, or performance troubleshooting. Trigger keywords: diagnose, debug, bug, broken, throw, error, fail, slow, crash, regression, root cause, investigate, repro, reproduction, bisect, performance, leak, exception, stack trace, log analysis.
 ---
 
 # Diagnosing Bugs
@@ -132,3 +132,15 @@ Required before declaring done:
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns
 
 **Then ask: what would have prevented this bug?** If the answer involves architectural change (no good test seam, tangled callers, hidden coupling) hand off to the `/improve-codebase-architecture` skill with the specifics. Make the recommendation **after** the fix is in, not before — you have more information now than when you started.
+
+## NEVER
+
+- NEVER jump to forming hypotheses before building a tight, red-capable feedback loop. No loop = no theory.
+- NEVER proceed without a deterministic, fast, agent-runnable feedback loop (except for flaky bugs where a high reproduction rate is acceptable).
+- NEVER generate fewer than 3 ranked hypotheses — single-hypothesis thinking anchors on the first plausible idea.
+- NEVER present a hypothesis without a falsifiable prediction ("If X is the cause, then changing Y will make the bug disappear").
+- NEVER skip the minimise step after reproduction. Always reduce the repro to the smallest load-bearing scenario.
+- NEVER write the regression test at a seam that is shallower than where the bug occurs — a test at the wrong seam gives false confidence.
+- NEVER declare the bug fixed without re-running the original (un-minimised) feedback loop to confirm the fix.
+- NEVER leave `[DEBUG-*]` tagged instrumentation in the codebase — always grep and remove before committing.
+- NEVER skip the post-mortem question ("what would have prevented this bug?") — the most valuable outcome is the systemic fix.

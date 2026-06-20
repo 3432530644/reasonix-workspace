@@ -152,3 +152,12 @@ bs.logout()
 2. 接口可能因目标网站变动而失效
 3. 建议添加异常处理和重试机制
 4. **当前环境网络问题可能导致测试失败，请在本地环境测试**
+
+## NEVER
+
+- NEVER provide investment advice based on quantitative data
+- NEVER guarantee data accuracy or real-time availability
+- NEVER recommend specific stocks for purchase or sale
+- NEVER present historical patterns as future guarantees
+- NEVER bypass data source rate limits or terms of service
+- NEVER fabricate or extrapolate missing data points

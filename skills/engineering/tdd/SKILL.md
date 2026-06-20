@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
+description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests, unit tests, regression tests, or behavior-driven development (BDD). Trigger keywords: tdd, test-driven, red-green-refactor, test first, unit test, integration test, regression test, behavior test, testing, test coverage, test suite, mocking, testability, refactor, tracer bullet, vertical slice.
 ---
 
 # Test-Driven Development
@@ -106,3 +106,21 @@ After all tests pass, look for [refactor candidates](refactoring.md):
 [ ] Code is minimal for this test
 [ ] No speculative features added
 ```
+
+## Error Handling
+
+- **Test fails unexpectedly**: If a previously passing test fails after a refactor, the test may be coupled to implementation rather than behavior. Check whether the test verifies _what_ the system does or _how_ it does it. Refactor the test to use public interfaces only.
+- **Stuck on RED**: If you cannot get a test to pass within a reasonable number of cycles, the interface may be wrong, or the test may be testing the wrong behavior. Revisit the plan with the user and confirm the expected interface.
+- **Refactoring while RED**: Never refactor with failing tests. Revert to the last GREEN state, fix the test failure, then refactor. Red-green-refactor is an ordered cycle — do not skip to refactor.
+- **Horizontal slice creep**: If you find yourself writing multiple tests before any implementation, stop. Switch to one test → one implementation → repeat (tracer bullet pattern).
+- **Mocking spiraling out of control**: If a test requires mocks for more than one collaborator, the module is probably too shallow or the seam is wrong. Consider deepening the module or repositioning the seam.
+
+## NEVER
+
+- NEVER write all tests first and then all implementation (horizontal slicing) — this produces tests coupled to imagined structure rather than actual behavior.
+- NEVER test private methods or internal implementation details — tests must verify behavior through the public interface only.
+- NEVER mock more than one collaborator in a single test — excessive mocking indicates a shallow module or wrong seam placement.
+- NEVER refactor while tests are RED — always reach GREEN before restructuring code.
+- NEVER anticipate future requirements by adding code or test cases for behaviors not yet requested — follow YAGNI.
+- NEVER use `sleep()` or fixed-time waits in tests — use deterministic synchronization (await promises, poll with timeout, or use framework-native async helpers).
+- NEVER commit a test that does not fail at least once on the RED step — a test that always passes may not be exercising the intended behavior.

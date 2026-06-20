@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
+description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, layout, color palette, and making choices that don't read as templated defaults. Trigger keywords: design, UI, UX, layout, visual, theme, styling, CSS, component design, wireframe, mockup, prototype, brand identity, aesthetic, typography, responsive.
 license: Complete terms in LICENSE.txt
 ---
 
@@ -53,3 +53,20 @@ Use active voice as default. A control should say exactly what happens when it's
 Treat failure and emptiness as moments for direction, not mood. Explain what went wrong and how to fix it, in the interface's voice rather than a person's. Errors don't apologize, and they are never vague about what happened. An empty screen is an invitation to act.
 
 Keep the register conversational and tuned: plain verbs, sentence case, no filler, with tone matched to the brand and the audience. Let each element do exactly one job. A label labels, an example demonstrates, and nothing quietly does double duty.
+
+## Error Handling
+
+- **CSS specificity conflicts**: After writing styles, check for selector cancellation (e.g., a class-based `.section` and an element-based `.cta` fighting over paddings/margins). Use browser devtools or pre-flight inspection to verify computed styles match your intent.
+- **Responsive breakage**: Test at 320px, 768px, and 1440px widths. If the signature element breaks layout, add containment or min/max constraints rather than removing it.
+- **Content mismatch**: If the design brief lacks real content, generate representative copy before building. Never leave placeholder lorem-ipsum in the final output.
+- **Design rejection**: If the plan or output reads as a generic default, stop and revisit the subject-specific grounding before continuing. State what was generic and what you changed.
+
+## NEVER
+
+- NEVER use templates, boilerplate, or default color palettes (cream + terracotta, near-black + acid accent, broadsheet hairline-rules) without adapting them to the specific subject and brief.
+- NEVER skip the two-pass process (plan → review → build). Building without a grounded design plan produces generic output.
+- NEVER add decorative elements (numbered markers, gradients, dividers) that encode no real information about the content.
+- NEVER leave lorem-ipsum or placeholder content in the final deliverable — write real copy that serves the design.
+- NEVER use the same typeface pairing across unrelated projects. Typography must be chosen deliberately for the subject.
+- NEVER ship CSS with unused or conflicting rules. Inspect selector specificity and remove dead code.
+- NEVER ignore accessibility: responsive down to mobile, visible keyboard focus, and `prefers-reduced-motion` must be respected.

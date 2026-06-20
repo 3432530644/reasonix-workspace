@@ -1,6 +1,6 @@
 ---
 name: to-prd
-description: Turn the current conversation into a PRD and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.
+description: Turn the current conversation into a PRD and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed. Trigger when the user says "write a PRD", "create product requirements", "document this feature", "generate a specification", "turn this into a spec", "formalize this feature", or has discussed a feature request and asks for formal documentation.
 disable-model-invocation: true
 ---
 
@@ -73,3 +73,23 @@ A description of the things that are out of scope for this PRD.
 Any further notes about the feature.
 
 </prd-template>
+
+## Error Handling
+
+| Situation | Handling |
+|-----------|----------|
+| `/setup-matt-pocock-skills` not run (issue tracker unknown) | Run setup first or ask the user for issue tracker URL and triage labels |
+| Repo exploration fails (no access, no README) | Ask the user for a summary of the codebase architecture |
+| User disagrees with proposed test seams | Discuss alternatives until consensus is reached; do not publish without agreement |
+| Issue tracker API returns 401/403 | Inform the user credentials are missing or expired |
+| PRD template section feels empty (e.g. Out of Scope) | Still include the section with "TBD — to be determined during implementation" rather than omitting it |
+
+## NEVER
+
+- NEVER interview the user for information — synthesize only from the conversation and codebase you have already explored
+- NEVER include specific file paths or inline code snippets in the PRD (they become outdated quickly)
+- NEVER skip exploring the repo to understand current codebase state before writing
+- NEVER apply triage labels other than `ready-for-agent` without explicit user instruction
+- NEVER omit the "Out of Scope" section — it prevents scope creep and sets clear boundaries
+- NEVER propose new test seams without first checking if existing seams can be reused
+- NEVER publish the PRD without user confirmation on the testing decisions
