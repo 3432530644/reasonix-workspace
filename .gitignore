@@ -20,3 +20,12 @@ my-project/
 
 # Personal notes
 notes/
+
+# Code graph
+.codegraph/
+
+# Temp files
+temp_*.py
+
+# Clipboard attachments
+.reasonix/attachments/
