@@ -1,0 +1,4 @@
+{"level":"error","message":"📦 [Redis] connection failed: connect ECONNREFUSED 127.0.0.1:6379","timestamp":"2026-06-20 11:02:28"}
+{"level":"error","message":"📦 [Redis] connection failed: Connection is closed.","timestamp":"2026-06-20 11:02:28"}
+{"level":"error","message":"❌ [ERROR] Cannot read properties of undefined (reading 'cards')","timestamp":"2026-06-20 11:02:28"}
+{"level":"error","message":"❌ [ERROR] Cannot read properties of undefined (reading 'cards')","timestamp":"2026-06-20 11:02:40"}

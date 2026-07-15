@@ -1,6 +1,6 @@
 ---
 name: writing-great-skills
-description: Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable. Use when authoring, editing, or reviewing a skill; when deciding model-invoked vs user-invoked; when structuring a skill's information hierarchy (steps, reference, progressive disclosure); when diagnosing skill issues like premature completion, duplication, sediment, sprawl, or no-op lines; when asked "how to write a skill", "skill structure", "skill principles", "improve this skill".
+description: Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable.
 disable-model-invocation: true
 ---
 
@@ -80,24 +80,4 @@ Use these to diagnose issues the user may be having with the skill.
 - **Sediment** — stale layers that settle because adding feels safe and removing feels risky. The default fate of any skill without a pruning discipline.
 - **Sprawl** — a skill simply too long, even when every line is live and unique. Hurts readability and maintainability and wastes tokens. The cure is the ladder: disclose **reference** behind pointers, and split by **branch** or sequence so each path carries only what it needs.
 - **No-op** — a line the model already obeys by default, so you pay load to say nothing. The test: does it change behaviour versus the default? A weak leading word (_be thorough_ when the agent is already thorough-ish) is a no-op; the fix is a stronger word (_relentless_), not a different technique.
-
-## Error Handling
-
-| Situation | Handling |
-|-----------|----------|
-| Skill is too long but every line is live | Use the ladder: disclose reference behind context pointers; split by branch or sequence |
-| Agent keeps finishing steps early | Sharpen the completion criterion first; if still fuzzy, split post-completion steps away |
-| Description keeps growing | Collapse synonyms into one branch per distinct trigger; front-load the leading word |
-| Skill behaviour drifts between runs | Check for duplication (same meaning in multiple places); consolidate to a single source of truth |
-| Agent ignores a rule that was important | Turn it into a **leading word** that recruits a strong pretrained prior; make the completion criterion checkable |
-| Two skills overlap in triggers | Re-evaluate granularity: merge into one or clarify leading-word boundaries |
-
-## NEVER
-
-- NEVER keep a line that fails the no-op test — if it doesn't change behaviour versus the default, delete it
-- NEVER duplicate a definition — keep each meaning in a single source of truth
-- NEVER let sediment accumulate without periodic pruning — schedule reviews
-- NEVER inline content that belongs in a disclosed reference file behind a context pointer
-- NEVER split a skill without a clear invocation or sequence reason — every cut spends load
-- NEVER write a description that lists synonyms as separate triggers — collapse them into one branch per distinct concept
-- NEVER leave a completion criterion fuzzy if you can make it checkable — vague criteria invite premature completion
+- **Negation** — steering by prohibition backfires: _don't think of an elephant_ names the elephant and makes it more available, not less. Prompt the **positive** — state the target behaviour so the banned one is never spoken; keep a prohibition only as a hard guardrail you can't phrase positively, and even then pair it with what to do instead.

@@ -1,6 +1,6 @@
 ---
 name: codebase-design
-description: Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary. Trigger keywords: architecture, design, refactor, restructure, module, interface, seam, dependency, testability, deep module, shallow module, code organization, API design, abstraction, decouple, separation of concerns.
+description: Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.
 ---
 
 # Codebase Design
@@ -112,21 +112,3 @@ Good interfaces make testing natural:
 
 - **Deepening a cluster given its dependencies** — see [DEEPENING.md](DEEPENING.md): dependency categories, seam discipline, and replace-don't-layer testing.
 - **Exploring alternative interfaces** — see [DESIGN-IT-TWICE.md](DESIGN-IT-TWICE.md): spin up parallel sub-agents to design the interface several radically different ways, then compare on depth, locality, and seam placement.
-
-## Error Handling
-
-- **Interface too large**: If a module has 7+ public methods or requires 4+ constructor parameters, reconsider the seam placement. Break into smaller modules or consolidate shared state behind a single method.
-- **No obvious seam**: If you cannot find a place to inject an alternative adapter, the module is tangled with its callers. Start by extracting the interface from the callers' perspective, then move implementation behind it.
-- **Seam introduced prematurely**: If an interface has only one adapter and you are not actively developing a second variant, remove the interface indirection. Wait for a real second adapter before introducing the seam.
-- **Testing through the wrong seam**: If tests are hard to write, the interface is probably wrong. Revisit depth — expose the right abstraction rather than mocking internal collaborators.
-- **Deletion test fails**: If deleting the module does not increase complexity at call sites (it was a pass-through), reconsider whether the module earns its keep.
-
-## NEVER
-
-- NEVER introduce an interface (seam) for a module that has only one adapter and no planned second variant — wait until a real variation exists.
-- NEVER design a module whose interface is nearly as large as its implementation (shallow module). Shallow modules pass through complexity rather than absorbing it.
-- NEVER use "component", "service", "API", or "boundary" when you mean module, interface, seam, or adapter — consistent vocabulary is essential for reasoning about depth.
-- NEVER let tests reach past the module's public interface. If you need to test internal state, the interface is missing the right abstraction.
-- NEVER add speculative features that no caller needs yet — they bloat the interface without contributing depth.
-- NEVER make a module accept dependencies it creates internally (e.g., `new StripeGateway()` inside `processOrder`). Accept dependencies so they can be swapped for tests.
-- NEVER ignore the deletion test — periodically ask "what would happen if this module disappeared?" to validate that it carries its weight.
