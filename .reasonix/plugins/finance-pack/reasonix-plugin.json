@@ -1,0 +1,23 @@
+{
+  "name": "finance-pack",
+  "description": "金融分析工具集 - 整合基金查询、股票分析、估值分析、浏览器自动化等功能",
+  "version": "1.1.0",
+  "skills": [
+    "skills/mx-finance-data",
+    "skills/fund-analyzer",
+    "skills/akshare-stock",
+    "skills/stock-market-pro",
+    "skills/stock-price-query",
+    "skills/valuation-analysis",
+    "skills/fund-news-daily",
+    "skills/stock-monitor-pro",
+    "skills/stock-watcher"
+  ],
+  "mcp_servers": [
+    {
+      "name": "mcp-server-playwright",
+      "command": "python",
+      "args": ["-m", "playwright_mcp"]
+    }
+  ]
+}
