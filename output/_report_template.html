@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; padding: 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  
+  .header { 
+    background: linear-gradient(135deg, #1a1a2e 0%, #0b4f6c 50%, #16213e 100%); 
+    color: #fff; padding: 30px; border-radius: 12px; margin-bottom: 20px; 
+  }
+  .header h1 { font-size: 24px; margin-bottom: 5px; }
+  .header .subtitle { font-size: 14px; color: #88bbdd; margin-top: 5px; }
+  .header .meta { color: #8899aa; font-size: 12px; margin-top: 8px; }
+  .header .badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; margin-left: 10px; }
+  .badge-buy { background: #e74c3c; color: #fff; }
+  .badge-hold { background: #f39c12; color: #fff; }
+  .badge-sell { background: #27ae60; color: #fff; }
+  .badge-watch { background: #7f8c8d; color: #fff; }
+  
+  .card { background: #fff; border-radius: 10px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .card h2 { font-size: 16px; margin-bottom: 15px; padding-left: 10px; }
+  .card h2.blue { border-left: 4px solid #3498db; color: #1a1a2e; }
+  .card h2.green { border-left: 4px solid #27ae60; }
+  .card h2.orange { border-left: 4px solid #f39c12; }
+  .card h2.purple { border-left: 4px solid #9b59b6; }
+  .card h2.red { border-left: 4px solid #e74c3c; }
+  
+  .section-tab { 
+    display: inline-block; padding: 6px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; margin-bottom: 15px;
+  }
+  .tab-analysis { background: #e3f2fd; color: #1565c0; }
+  .tab-backtest { background: #e8f5e9; color: #2e7d32; }
+  
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+  
+  .metric { text-align: center; padding: 12px; background: #f8f9fa; border-radius: 8px; }
+  .metric .label { font-size: 11px; color: #8899aa; }
+  .metric .value { font-size: 20px; font-weight: 700; margin-top: 4px; }
+  .metric .sub { font-size: 11px; color: #666; margin-top: 2px; }
+  .up { color: #e74c3c; }
+  .down { color: #27ae60; }
+  
+  .signal-row { display: flex; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
+  .signal-row:last-child { border: none; }
+  .signal-name { width: 120px; font-weight: 600; }
+  .signal-bar-bg { flex: 1; height: 8px; background: #eee; border-radius: 4px; margin: 0 10px; }
+  .signal-bar { height: 8px; border-radius: 4px; }
+  .signal-val { width: 70px; text-align: right; font-weight: 600; }
+  
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f0f2f5; padding: 8px 10px; text-align: left; font-weight: 600; }
+  td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; }
+  tr:hover td { background: #f8f9fa; }
+  
+  .strategy-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px; margin-bottom: 10px; }
+  .strategy-card.gold { border-left: 4px solid #f1c40f; background: #fefcf0; }
+  .strategy-card .s-metric { display: inline-block; margin-right: 20px; font-size: 13px; }
+  .strategy-card .s-metric .s-val { font-weight: 700; font-size: 15px; }
+  
+  .verdict { 
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9); 
+    border: 2px solid #27ae60; border-radius: 12px; padding: 25px; margin: 20px 0; 
+  }
+  .verdict.hold { background: linear-gradient(135deg, #fff8e1, #fff3e0); border-color: #f39c12; }
+  .verdict.sell { background: linear-gradient(135deg, #fce4ec, #ffebee); border-color: #e74c3c; }
+  .verdict.watch { background: linear-gradient(135deg, #f5f5f5, #eeeeee); border-color: #9e9e9e; }
+  
+  .verdict .label-top { font-size: 13px; color: #666; }
+  .verdict .action-main { font-size: 28px; font-weight: 800; margin: 8px 0; }
+  .verdict .reason-list { font-size: 14px; line-height: 1.9; margin-top: 12px; }
+  
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .tag-best { background: #27ae60; color: #fff; }
+  .tag-warn { background: #e74c3c; color: #fff; }
+  .tag-info { background: #3498db; color: #fff; }
+
+  .divider { 
+    text-align: center; margin: 25px 0 15px; position: relative; 
+  }
+  .divider::before { 
+    content: ''; position: absolute; top: 50%; left: 0; right: 0; 
+    height: 1px; background: #ddd; 
+  }
+  .divider span { 
+    background: #f5f7fa; padding: 0 15px; position: relative; z-index: 1; 
+    font-size: 20px; 
+  }
+
+  .footer { text-align: center; color: #8899aa; font-size: 11px; margin-top: 20px; padding: 15px; }
+  
+  @media (max-width: 600px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+  <h1>{{STOCK_NAME}} ({{STOCK_CODE}}) 综合研究分析报告</h1>
+  <div class="subtitle">📸 当前位置分析 + 🎬 量化策略回测 = 统一决策</div>
+  <div style="margin-top:10px;">操作建议：<span class="badge badge-{{RATING_CLASS}}">{{RATING_TEXT}}</span></div>
+  <div class="meta">报告日期：{{REPORT_DATE}} | 数据截至：{{DATA_DATE}} | 数据来源：Vibe-Trading (Tencent/Eastmoney)</div>
+</div>
+
+<!-- ========== PART 1: CURRENT ANALYSIS ========== -->
+<div class="divider"><span>📸 第一部分：当前位置分析</span></div>
+
+<!-- 关键指标 -->
+<div class="card">
+  <h2 class="blue">关键指标一览</h2>
+  <div class="grid-4">
+    <div class="metric"><div class="label">最新收盘价</div><div class="value">{{LAST_PRICE}}</div><div class="sub">{{PRICE_CHANGE}}</div></div>
+    <div class="metric"><div class="label">区间涨跌幅</div><div class="value {{PERF_CLASS}}">{{PERIOD_RETURN}}</div><div class="sub">近{{PERIOD_DAYS}}天</div></div>
+    <div class="metric"><div class="label">最大回撤</div><div class="value down">{{MAX_DD}}</div><div class="sub">近{{PERIOD_DAYS}}天</div></div>
+    <div class="metric"><div class="label">日均成交额</div><div class="value">{{AVG_AMOUNT}}</div><div class="sub">{{VOL_CHANGE}}</div></div>
+  </div>
+</div>
+
+<!-- 技术面 -->
+<div class="card">
+  <h2 class="blue">技术面信号</h2>
+  <div class="grid-2">
+    <div>
+      <h3 style="font-size:14px;margin-bottom:8px;">均线系统</h3>
+      <div class="signal-row"><span class="signal-name">MA5 ({{MA5_VAL}})</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{MA5_PCT}}%;background:{{MA5_COLOR}}"></div></div><span class="signal-val">{{MA5_SIGNAL}}</span></div>
+      <div class="signal-row"><span class="signal-name">MA10 ({{MA10_VAL}})</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{MA10_PCT}}%;background:{{MA10_COLOR}}"></div></div><span class="signal-val">{{MA10_SIGNAL}}</span></div>
+      <div class="signal-row"><span class="signal-name">MA20 ({{MA20_VAL}})</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{MA20_PCT}}%;background:{{MA20_COLOR}}"></div></div><span class="signal-val">{{MA20_SIGNAL}}</span></div>
+      <div class="signal-row"><span class="signal-name">MA60 ({{MA60_VAL}})</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{MA60_PCT}}%;background:{{MA60_COLOR}}"></div></div><span class="signal-val">{{MA60_SIGNAL}}</span></div>
+    </div>
+    <div>
+      <h3 style="font-size:14px;margin-bottom:8px;">震荡指标</h3>
+      <div class="signal-row"><span class="signal-name">RSI(14)</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{RSI_PCT}}%;background:{{RSI_COLOR}}"></div></div><span class="signal-val">{{RSI_TEXT}}</span></div>
+      <div class="signal-row"><span class="signal-name">MACD</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{MACD_PCT}}%;background:{{MACD_COLOR}}"></div></div><span class="signal-val">{{MACD_TEXT}}</span></div>
+      <div class="signal-row"><span class="signal-name">布林带</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{BB_PCT}}%;background:{{BB_COLOR}}"></div></div><span class="signal-val">{{BB_TEXT}}</span></div>
+      <div class="signal-row"><span class="signal-name">成交量</span><div class="signal-bar-bg"><div class="signal-bar" style="width:{{VOL_PCT}}%;background:{{VOL_COLOR}}"></div></div><span class="signal-val">{{VOL_SIGNAL}}</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:13px;padding:10px;background:#f8f9fa;border-radius:6px;">
+    <strong>均线形态：</strong>{{MA_PATTERN}} | <strong>综合技术信号：</strong>{{TECH_VERDICT}}
+  </div>
+</div>
+
+<!-- 资金面 + 消息面 -->
+<div class="card">
+  <div class="grid-2">
+    <div>
+      <h2 class="green">资金面</h2>
+      <table>
+        <tr><th>类型</th><th>净流入</th><th>方向</th></tr>
+        <tr><td>主力资金</td><td>{{MAIN_FLOW}}</td><td>{{MAIN_FLOW_DIR}}</td></tr>
+        <tr><td>超大单</td><td>{{SUPER_LARGE_FLOW}}</td><td>{{SUPER_LARGE_DIR}}</td></tr>
+        <tr><td>北向资金</td><td>{{NORTH_FLOW}}</td><td>{{NORTH_DIR}}</td></tr>
+      </table>
+      <p style="font-size:13px;margin-top:8px;">{{FLOW_ANALYSIS}}</p>
+    </div>
+    <div>
+      <h2 class="orange">消息面</h2>
+      <ul style="font-size:13px;line-height:1.8;padding-left:18px;">
+        {{NEWS_ITEMS}}
+      </ul>
+      <p style="font-size:13px;margin-top:8px;color:#666;">新闻情绪：{{NEWS_SENTIMENT}}</p>
+    </div>
+  </div>
+</div>
+
+<!-- 近期行情表 -->
+<div class="card">
+  <h2 class="purple">近期行情</h2>
+  <table>
+    <tr><th>日期</th><th>开盘</th><th>收盘</th><th>最高</th><th>最低</th><th>涨跌幅</th><th>成交量</th></tr>
+    {{RECENT_ROWS}}
+  </table>
+</div>
+
+<!-- ========== PART 2: BACKTEST ========== -->
+<div class="divider"><span>🎬 第二部分：量化策略回测验证</span></div>
+
+<div class="card">
+  <h2 class="green">多策略历史回测对比</h2>
+  <p style="font-size:13px;color:#666;margin-bottom:12px;">回测区间：{{BT_START}} ~ {{BT_END}} | 初始资金：{{BT_CASH}} | 数据源：{{BT_SOURCE}}</p>
+  
+  <table>
+    <tr>
+      <th>策略</th>
+      <th>总收益率</th>
+      <th>年化收益</th>
+      <th>夏普比率</th>
+      <th>最大回撤</th>
+      <th>胜率</th>
+      <th>交易次数</th>
+      <th></th>
+    </tr>
+    {{BT_STRATEGY_ROWS}}
+    <tr style="background:#f8f9fa;font-weight:600;">
+      <td>📊 买入持有（基准）</td>
+      <td class="{{BENCHMARK_CLASS}}">{{BENCHMARK_RETURN}}</td>
+      <td>—</td>
+      <td>—</td>
+      <td>{{BENCHMARK_DD}}</td>
+      <td>—</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2 class="green">策略解读</h2>
+  <div style="font-size:13px;line-height:1.8;">
+    <p><strong>🏆 最优策略：</strong>{{BEST_STRATEGY}}（总收益 {{BEST_RETURN}}，夏普 {{BEST_SHARPE}}）</p>
+    <p><strong>📈 跑赢基准：</strong>{{BEAT_BENCHMARK}}</p>
+    <p><strong>⚠️ 风险提示：</strong>{{RISK_NOTE}}</p>
+  </div>
+</div>
+
+<!-- ========== FINAL VERDICT ========== -->
+<div class="divider"><span>✅ 统一决策结论</span></div>
+
+<div class="verdict {{VERDICT_CLASS}}">
+  <div class="label-top">当前分析 × 历史回测 → 综合操作建议</div>
+  <div class="action-main" style="color:{{VERDICT_COLOR}};">{{VERDICT_ACTION}}</div>
+  <div class="reason-list">
+    <p><strong>📸 当前分析依据：</strong></p>
+    <p>{{CURRENT_REASONS}}</p>
+    <p style="margin-top:8px;"><strong>🎬 回测验证依据：</strong></p>
+    <p>{{BACKTEST_REASONS}}</p>
+    <p style="margin-top:12px;padding:10px;background:rgba(255,255,255,0.7);border-radius:6px;">
+      <strong>🎯 具体操作：</strong>{{ACTION_DETAIL}}
+    </p>
+    <p style="margin-top:8px;"><strong>📌 关注点：</strong>{{WATCH_POINTS}}</p>
+  </div>
+</div>
+
+<!-- 指标说明 -->
+<div class="card" style="background:#f8f9fa;">
+  <h2 style="border-left-color:#95a5a6;color:#666;">📖 指标说明（小白版）</h2>
+  <div style="font-size:13px;line-height:2;">
+    • <strong>MA5/10/20/60</strong>：移动平均线。价格在均线上方=短期多头，下方=空头。MA5>MA10>MA20=多头排列（看涨）<br>
+    • <strong>RSI(14)</strong>：相对强弱指标。>70超买（可能回调），<30超卖（可能反弹），30-70为正常区间<br>
+    • <strong>MACD</strong>：快线上穿慢线=金叉（看多），下穿=死叉（看空）。红柱变长=多头增强<br>
+    • <strong>布林带</strong>：价格触及上轨=短期超买，触及下轨=短期超卖。带宽扩大=波动加剧<br>
+    • <strong>主力资金</strong>：超大单+大单合计，反映机构资金态度。持续净流入=机构看好<br>
+    • <strong>夏普比率</strong>：>1优秀，>0.5良好，<0不如存银行<br>
+    • <strong>最大回撤</strong>：从最高点跌到最低点的最大幅度，越小说明风控越好<br>
+    • <strong>胜率</strong>：盈利交易占总交易的比例。结合盈亏比一起看更准确<br>
+  </div>
+</div>
+
+<div class="footer">
+  <p>⚠️ 免责声明：本报告基于公开数据生成，仅供参考，不构成投资建议。回测结果不考虑交易成本。过去表现不代表未来收益。</p>
+  <p>Generated by Reasonix AI · Vibe-Trading MCP | {{OUTPUT_PATH}}</p>
+</div>
+
+</div>
+</body>
+</html>

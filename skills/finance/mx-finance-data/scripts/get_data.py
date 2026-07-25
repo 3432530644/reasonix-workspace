@@ -84,10 +84,9 @@ _ENTITY_CODE_RE = re.compile(r"\(([0-9A-Z.]+\.[A-Z]+)\)")
 def _get_default_output_dir() -> Path:
     """
     返回默认输出目录路径。
-    默认目录为当前工作目录下的 miaoxiang/mx_finance_data。
-    仅负责路径拼接，不创建目录。
+    统一输出到 output/ 目录。
     """
-    return Path.cwd() / "eastmoney" / "东方财富"
+    return Path.cwd() / "output"
 
 
 def _flatten_value(v: Any) -> str:
