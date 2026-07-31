@@ -35,3 +35,10 @@ temp_*.py
 .skills_store_lock.json
 db_err*.log
 file_urls_debug.log
+
+# 仓库瘦身：大媒体文件不入库
+vibe-trading/assets/*.mp4
+doubao2api/docs/assets/
+
+# 输出目录（报告/生成物）不入库
+output/
