@@ -1,0 +1,22 @@
+{
+  "static": {
+    "scores": {
+      "D0": 8, "D1": 9, "D2": 8, "D3": 9, "D4": 8, "D5": 9, "D6": 8, "D7": 8, "D8": 9, "D9": 9
+    },
+    "weights": {"D0": 15, "D1": 10, "D2": 10, "D3": 15, "D4": 10, "D5": 10, "D6": 5, "D7": 10, "D8": 10, "D9": 5},
+    "total": 85.0,
+    "grade": "A",
+    "checklist": {"passed": 30, "total": 32},
+    "fixed": [
+      "description 补 NEGATIVE BOUNDARIES（多轮对话/付费服务替代勿用）— D1.10",
+      "frontmatter 补 license + allowed-tools — D1.12",
+      "NEVER 规则补 WHY + 失败示例 — D5.2/D5.3",
+      "body 补 checklist 进度框 — D3",
+      "豁免：Windows 反斜杠路径为必要；无 references（body 仅 1.2K tokens 无需拆分）"
+    ]
+  },
+  "d10": {
+    "d10_1": 0, "d10_2": 0, "d10_3": 0,
+    "note": "无 test-prompts.json / trigger-queries.json（测试集缺失）；但已通过真实冒烟验证：smoke 遍历 8 provider + Chrome CDP 自动启动成功，可运行性经实测确认"
+  }
+}

@@ -1,0 +1,16 @@
+INFO:     Started server process [22992]
+INFO:     Waiting for application startup.
+Starting BrowserClient (headless=True)
+Navigating to https://www.doubao.com/chat/
+Login check: login_button_count=1
+Not logged in - login button visible
+Injected 27 cookies into browser context
+Login check: login_button_count=0
+Params: device_id=7668721983467554355, web_id=7668739312859088384, fp=verify_ms95tkhz_L4h3
+Seeded msToken from cookies (128 chars)
+Fetch bridge registered (expose_function ready)
+Fetch hook verified active after 2s
+bdms.frontierSign available after 5s
+Ready! device_id=7668721983467554355, fetch_hook=True
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:9090 (Press CTRL+C to quit)

@@ -330,7 +330,7 @@ preferences:
   # 固定每日一次：Agent 在前置检查「步骤 0」按 last_check_date 节流，
   # 扫描并清理废弃配置（完整逻辑见 SKILL.md 步骤 0）。本块唯一字段为 last_check_date。
   maintenance:
-    last_check_date: "2026-06-20"  # 上次检测日期（ISO YYYY-MM-DD），空 = 从未检测；由 Agent 自动更新
+    last_check_date: "2026-07-31"  # 上次检测日期（ISO YYYY-MM-DD），空 = 从未检测；由 Agent 自动更新
 
   # 安装位置策略：默认与 skill-assistant 同级目录（自动感知）
   # 例如 skill-assistant 在 .cursor/skills/ 下，新 Skill 也装到 .cursor/skills/

@@ -1,0 +1,7 @@
+skill_name: agentchat-web
+version: "1.0.0"
+eval_mode: static
+status: completed
+created_at: "2026-07-31"
+source: ziwang-Physics/AgentChat (Reasonix 适配 playbook)
+workspace_layout: project_local (sandbox 内)

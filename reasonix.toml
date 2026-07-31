@@ -108,4 +108,5 @@ args    = ["-m", "playwright_mcp"]
 
 [[plugins]]
 name    = "vibe-trading"
-command = "vibe-trading-mcp"
+type    = "http"
+url     = "http://127.0.0.1:8900/mcp"

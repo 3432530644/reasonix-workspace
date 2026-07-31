@@ -577,9 +577,7 @@ async function main() {
           console.error('   按上方提示修 schema 后重跑；或加 --skip-validator 跳过（不推荐）');
           process.exit(1);
         } else if (e.status === 2) {
-          console.warn('
-⚠️  validator 仅警告，继续生成报告（建议后续升级 schema）
-');
+          console.warn('⚠️  validator 仅警告，继续生成报告（建议后续升级 schema）');
         } else if (e.status === 3) {
           console.warn('\n⚠️  validator 路径错误，跳过校验继续\n');
         } else {

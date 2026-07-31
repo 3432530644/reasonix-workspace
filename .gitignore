@@ -29,3 +29,9 @@ temp_*.py
 
 # Clipboard attachments
 .reasonix/attachments/
+
+# 临时 wheel 缓存与锁文件
+.ocr_wheels/
+.skills_store_lock.json
+db_err*.log
+file_urls_debug.log
